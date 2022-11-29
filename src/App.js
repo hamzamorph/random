@@ -1,5 +1,5 @@
 import React from "react";
-import Opp from "./components/compo";
+import {Opp} from "./components/compofunc";
 function App() {
   return (
     <div>
