@@ -1,4 +1,5 @@
 import Loader from "./Loader";
+import {callback} from "./callbackfunc";
 import React from "react";
 import { useState, useEffect } from "react";
 
@@ -11,36 +12,13 @@ export const Opp = () => {
     },[]);
 
     const repeat = () => {
-        setLoading(true);
       
-      fetch("https://randomuser.me/api/")
-        .then((results) => {
-          return results.json();
-        })
-        .then((data) => {
-            setLoading(false);
+        setLoading(true);
 
-          let items = data.results.map((item) => {
-            return ( 
-                <div key={item.id}>
-                  <h2> {item.name.first}</h2>
-                  <img
-                    src={item.picture.large}
-                    className="profile-pic"
-                    alt="profile-img"
-                  />
-  
-                    <h2> {item.location.country}</h2>
-                  
-                 
-                  <button className="random-btn" onClick={repeat}>
-                    NEXT
-                  </button>
-                </div>
-            );
-          });
-          setItems(items);
-        });
+
+
+      fetch("https://randomuser.me/api/")
+        .then((data) => callback(setItems,setLoading,data,repeat));
     }
 
     return (
